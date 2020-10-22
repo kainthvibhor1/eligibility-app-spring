@@ -47,7 +47,7 @@ jobs:
             echo "TAG_NAME=latest" >> $GITHUB_ENV
           else
             echo "Using Branch Name $GITHUB_REF"
-            echo "TAG_NAME=$(echo $GITHUB_REF | cut -d'/' -f 3- | tr / _)" >> $GITHUB_ENV
+            echo "TAG_NAME=$(echo $GITHUB_REF | cut -d'/' -f 3- | tr /-\+ _)" >> $GITHUB_ENV
           fi
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
