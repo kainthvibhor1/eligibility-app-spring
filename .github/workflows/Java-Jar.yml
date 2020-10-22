@@ -19,11 +19,16 @@ jobs:
         with:
           name: app
           path: target/*.jar
-      - name: Upload jacoco coverage report
+      - name: Save Jacoco Report
         uses: actions/upload-artifact@v2
         with:
           name: jacoco-report
           path: target/site/jacoco
+      - name: Upload Jacoco Report to CodeCov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: target/site/jacoco/jacoco.xml
 
   build-docker-image:
     name: Docker Build and Deploy
